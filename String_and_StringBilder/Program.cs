@@ -163,7 +163,14 @@ namespace String_and_StringBilder_part_1
                         }
                         else
                         {
-                            i += j + 1;
+                            if (j == 0)
+                            {
+                                i++;
+                            }
+                            else
+                            {
+                                i += j;
+                            }
                             break;
                         }
                     }
@@ -178,17 +185,75 @@ namespace String_and_StringBilder_part_1
 
         static void jobNumberEleven()
         {
-
+            Console.WriteLine("Введите исходную строку str:");
+            StringBuilder originalString = new StringBuilder(Console.ReadLine());
+            Console.WriteLine("Введите подстроку substr1 которая будет заменена: ");
+            string substr1 = Console.ReadLine();
+            Console.WriteLine("Введите подстроку substr1 которая будет заменена: ");
+            string substr2 = Console.ReadLine();
+            if (originalString.Length > substr1.Length)
+            {
+                int i = 0;
+                while (i < originalString.Length)
+                {
+                    int j = 0;
+                    while (j < substr1.Length)
+                    {
+                        if (originalString[i + j] == substr1[j])
+                        {
+                            j++;
+                            if (j == substr1.Length)
+                            {
+                                originalString.Remove(i, j);
+                                originalString.Insert(i, substr2);
+                                i += substr2.Length;
+                            }
+                        }                        
+                        else
+                        {
+                            if(j==0)
+                            {
+                                i++;
+                            }
+                            else
+                            {
+                                i += j;
+                            }                            
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (originalString.ToString() == substr1)
+            {
+                originalString.Clear();
+                originalString.Append(substr2);
+            }
+            Console.WriteLine(originalString.ToString());
         }
 
         static void jobNumberTwelve()
         {
-
+            Console.WriteLine("Введите исходную строку str:");
+            string originalString = Console.ReadLine();
+            int Summa = 0;
+            for (int i = 0; i < originalString.Length; i++)
+            {
+                if (Char.IsDigit(originalString[i])) { Summa+= (int)Char.GetNumericValue(originalString[i]); }
+            }
+            Console.WriteLine($"Сумма циферных символов = {Summa}:");
         }
 
         static void jobNumberThirteen()
         {
-
+            Console.WriteLine("Введите исходную строку str:");
+            string originalString = Console.ReadLine();
+            int Count = 0;
+            for (int i = 0; i < originalString.Length; i++)
+            {
+                if (Char.IsDigit(originalString[i])) { Count++; }
+            }
+            Console.WriteLine($"Общее кол-во циферных символов = {Count}:");
         }
 
         static void jobNumberFourteen()
