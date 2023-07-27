@@ -258,33 +258,162 @@ namespace String_and_StringBilder_part_1
 
         static void jobNumberFourteen()
         {
-
+            Console.WriteLine("Введите исходную строку str:");
+            string originalString = Console.ReadLine();
+            Console.WriteLine("Введите символ X которую будут искать: ");
+            char xChar = char.Parse(Console.ReadLine());
+            int firstNumber=0, lastNumber=0;
+            for(int i =0; i<originalString.Length; i++)
+            {
+                if (originalString[i] == xChar)
+                {
+                    firstNumber = i;
+                    break;
+                }
+            }
+            for(int i = originalString.Length - 1; i >= 0; i--)
+            {
+                if (originalString[i] == xChar) { lastNumber = i; break; }
+            }
+            Console.WriteLine($"Первое появление символа на {firstNumber} положении, а послдение на {lastNumber}");
         }
 
         static void jobNumberFifteen()
         {
-
+            Console.WriteLine("Введите исходную строку str:");
+            StringBuilder originalString = new StringBuilder(Console.ReadLine());
+            for(int i = 0;i < originalString.Length; i++)
+            {
+                if (originalString[i] == '.' && i < originalString.Length - 1)
+                {
+                    int startIndex=i;
+                    int j = 1;
+                    i++;
+                    if (originalString[i] == '.' && i < originalString.Length-1) 
+                    {
+                        i++;
+                        j++;
+                        while (originalString[i]=='.' && i < originalString.Length-1)
+                        {
+                            i++;
+                            j++;
+                        }
+                        originalString.Remove(startIndex,j);
+                        originalString.Insert(startIndex, "...");
+                        
+                    }
+                }
+            }
+            Console.WriteLine(originalString.ToString()); 
         }
 
         static void jobNumberSixteen()
         {
-
+            Console.WriteLine("Введите исходную строку str:");
+            StringBuilder originalString = new StringBuilder(Console.ReadLine());
+            for (int i = 0; i < originalString.Length; i++)
+            {
+                if (originalString[i]==':' )
+                {
+                    originalString.Remove(i, originalString.Length - i);
+                    break;
+                }
+            }
+            Console.WriteLine(originalString.ToString());
         }
+
         static void jobNumberSeventeen()
         {
-
+            Console.WriteLine("Введите исходную строку str:");
+            StringBuilder originalString = new StringBuilder(Console.ReadLine());
+            
+            for (int i = originalString.Length -1; i >= 0 ; i--)
+            {
+                if (originalString[i] == ':')
+                {
+                    originalString.Remove(0, i+1);
+                    break;
+                }
+            }
+            Console.WriteLine(originalString.ToString());
         }
+
         static void jobNumberEighteen()
         {
-
+            Console.WriteLine("Введите исходную строку str:");
+            StringBuilder originalString = new StringBuilder(Console.ReadLine());
+            for (int i = 0; i < originalString.Length; i++)
+            {
+                if (i < originalString.Length  && originalString[i] == '(' )
+                {
+                    int startIndex = i;
+                    int j = 0;
+                    i++;
+                    while (i < originalString.Length && originalString[i] != ')'   )
+                    {
+                         i++;
+                         j++;
+                    }
+                    if(i < originalString.Length)
+                    {
+                        originalString.Remove(startIndex+1, j);
+                        i = startIndex+1;
+                    }
+                }
+            }
+            Console.WriteLine(originalString.ToString());
         }
         static void jobNumberNineteen()
         {
-
+            Console.WriteLine("Введите исходную строку str:");
+            StringBuilder originalString = new StringBuilder(Console.ReadLine());
+            for (int i = 0; i < originalString.Length; i++)
+            {
+                if (i < originalString.Length && originalString[i] == ',')
+                {
+                    int startIndex = i;
+                    int j = 0;
+                    i++;
+                    while (i < originalString.Length && originalString[i] != ',')
+                    {
+                        i++;
+                        j++;
+                    }
+                    if (i < originalString.Length)
+                    {
+                        originalString.Remove(startIndex + 1, j);
+                        i = startIndex + 1;
+                    }
+                }
+            }
+            Console.WriteLine(originalString.ToString());
         }
         static void jobNumberTwenty()
         {
+            Console.WriteLine("Введите исходную строку str:");
+            string originalString = Console.ReadLine();
+            StringBuilder differentSymbol = new StringBuilder("");
+            for(int i = 0; i<originalString.Length; i++)
+            {
+                if(SearchSymbol(differentSymbol, originalString[i]))
+                {
+                    differentSymbol.Append(originalString[i]);
+                }
+            }
+            Console.WriteLine(differentSymbol.Length);
 
+        }
+
+        static bool SearchSymbol(StringBuilder stringBuilder, char symbol)
+        {
+            for(int i=0; i<stringBuilder.Length; i++)
+            {
+                if (stringBuilder[i] == symbol)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         static void Main(string[] args)
